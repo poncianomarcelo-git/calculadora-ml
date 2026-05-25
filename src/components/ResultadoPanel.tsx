@@ -174,20 +174,25 @@ export function ResultadoPanel({
       </div>
 
       {/* Mobile: rodapé fixo */}
-      <div className="md:hidden fixed bottom-0 inset-x-0 z-30 bg-white border-t border-gray-200 shadow-lg">
+      <div className="md:hidden fixed bottom-0 inset-x-0 z-30 shadow-lg">
         <button
           onClick={onToggleMobile}
-          className="w-full flex items-center justify-between px-4 py-3 text-ml-text font-semibold"
+          className="w-full flex items-center justify-between px-4 py-3 bg-ml-blue text-white"
         >
-          <span>
-            {resultado && custoTotal > 0
-              ? `Preço sugerido: ${formatBRL(resultado.preco)}`
-              : 'Ver resultado'}
-          </span>
-          {mobileAberto ? <ChevronDown size={18} /> : <ChevronUp size={18} />}
+          {resultado && custoTotal > 0 ? (
+            <div className="text-left">
+              <p className="text-xs text-white/70 font-normal leading-none mb-0.5">Preço sugerido</p>
+              <p className="text-xl font-bold leading-tight">{formatBRL(resultado.preco)}</p>
+            </div>
+          ) : (
+            <span className="font-semibold">Ver resultado</span>
+          )}
+          {mobileAberto
+            ? <ChevronDown size={20} className="shrink-0" />
+            : <ChevronUp size={20} className="shrink-0" />}
         </button>
         {mobileAberto && (
-          <div className="border-t border-gray-100 max-h-[50vh] overflow-y-auto">
+          <div className="bg-white border-t border-gray-100 max-h-[50vh] overflow-y-auto">
             {conteudo}
           </div>
         )}
