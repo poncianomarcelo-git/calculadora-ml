@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-ml-yellow: #FFE600;
+  --color-ml-yellow-dark: #F5D000;
+  --color-ml-blue: #3483FA;
+  --color-ml-blue-dark: #2968C8;
+  --color-ml-gray: #EBEBEB;
+  --color-ml-gray-dark: #666666;
+  --color-ml-text: #333333;
+  --color-ml-green: #00A650;
+  --color-ml-red: #F23D4F;
+  --font-sans: 'Inter', 'Nunito Sans', sans-serif;
+}
+
+body {
+  font-family: 'Inter', 'Nunito Sans', sans-serif;
+  color: #333333;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
