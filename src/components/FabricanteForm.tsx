@@ -145,16 +145,6 @@ export function FabricanteForm({
       {/* Matérias-primas */}
       <SectionCard title="Matérias-primas">
         <div className="space-y-3">
-          {/* Cabeçalho das colunas */}
-          <div className="grid grid-cols-[1fr_58px_60px_60px_80px_auto] gap-2">
-            <span className="text-xs text-ml-gray-dark">Material</span>
-            <span className="text-xs text-ml-gray-dark">Unid.</span>
-            <span className="text-xs text-ml-gray-dark">Larg./Qtd</span>
-            <span className="text-xs text-ml-gray-dark">Alt. (cm)</span>
-            <span className="text-xs text-ml-gray-dark">R$/unid.</span>
-            <span />
-          </div>
-
           {materiaisLinha.map((linha) => {
             const isM2 = linha.unidade === 'm2'
             const mat = materiaisConfig.find((m) => m.id === linha.materialId)
@@ -167,95 +157,85 @@ export function FabricanteForm({
               : 0
 
             return (
-              <div key={linha.id} className="grid grid-cols-[1fr_58px_60px_60px_80px_auto] gap-2 items-center">
-                {/* Material */}
-                <select
-                  value={linha.materialId}
-                  onChange={(e) => onUpdateMaterial(linha.id, 'materialId', e.target.value)}
-                  className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue bg-white"
-                >
-                  <option value="">Selecione...</option>
-                  {materiaisConfig.map((m) => (
-                    <option key={m.id} value={m.id}>{m.nome}</option>
-                  ))}
-                </select>
-
-                {/* Unidade */}
-                <select
-                  value={linha.unidade}
-                  onChange={(e) => onUpdateMaterial(linha.id, 'unidade', e.target.value as UnidadeMaterial)}
-                  className="w-full border border-gray-300 rounded-lg px-1 py-2 text-sm focus:outline-none focus:border-ml-blue bg-white"
-                >
-                  {UNIDADES.map((u) => (
-                    <option key={u.value} value={u.value}>{u.label}</option>
-                  ))}
-                </select>
-
-                {/* Larg ou Qtd */}
-                <input
-                  type="text"
-                  inputMode="decimal"
-                  value={isM2 ? (linha.largura || '') : (linha.quantidade || '')}
-                  onChange={(e) => {
-                    const v = parseFloat(e.target.value.replace(',', '.')) || 0
-                    onUpdateMaterial(linha.id, isM2 ? 'largura' : 'quantidade', v)
-                  }}
-                  placeholder={isM2 ? 'cm' : 'qtd'}
-                  className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
-                />
-
-                {/* Alt (só m²) */}
-                {isM2 ? (
-                  <input
-                    type="text"
-                    inputMode="decimal"
-                    value={linha.altura || ''}
-                    onChange={(e) => {
-                      const v = parseFloat(e.target.value.replace(',', '.')) || 0
-                      onUpdateMaterial(linha.id, 'altura', v)
-                    }}
-                    placeholder="cm"
-                    className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
-                  />
-                ) : (
-                  <div />
-                )}
-
-                {/* Preço travado (vem das Configurações) */}
-                {preco > 0 ? (
-                  <div className="w-full border border-gray-200 rounded-lg px-2 py-2 text-sm bg-gray-50 text-ml-gray-dark cursor-default select-none flex items-center justify-between gap-1">
-                    <span className="text-xs whitespace-nowrap">{formatBRL(preco)}/{unLabel}</span>
-                    <span
-                      title="Valor definido em Configurações. Acesse o menu para alterar."
-                      className="shrink-0 text-ml-gray-dark hover:text-ml-blue cursor-help"
-                    >
-                      <Info size={13} />
-                    </span>
-                  </div>
-                ) : (
-                  <button
-                    type="button"
-                    onClick={onOpenConfig}
-                    className="w-full border border-amber-300 rounded-lg px-2 py-2 text-xs bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors text-center leading-snug"
+              <div key={linha.id} className="space-y-2 pb-3 border-b border-gray-100 last:border-0 last:pb-0">
+                {/* Linha 1: Material + Unidade + Delete */}
+                <div className="flex gap-2 items-center">
+                  <select
+                    value={linha.materialId}
+                    onChange={(e) => onUpdateMaterial(linha.id, 'materialId', e.target.value)}
+                    className="flex-1 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue bg-white"
                   >
-                    Cadastrar custo
-                  </button>
-                )}
-
-                {/* Custo + delete */}
-                <div className="flex items-center gap-1">
-                  {custo > 0 && (
-                    <span className="text-xs text-ml-green font-medium whitespace-nowrap">
-                      {formatBRL(custo)}
-                    </span>
-                  )}
+                    <option value="">Selecione o material...</option>
+                    {materiaisConfig.map((m) => (
+                      <option key={m.id} value={m.id}>{m.nome}</option>
+                    ))}
+                  </select>
+                  <select
+                    value={linha.unidade}
+                    onChange={(e) => onUpdateMaterial(linha.id, 'unidade', e.target.value as UnidadeMaterial)}
+                    className="w-20 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue bg-white"
+                  >
+                    {UNIDADES.map((u) => (
+                      <option key={u.value} value={u.value}>{u.label}</option>
+                    ))}
+                  </select>
                   <button
                     onClick={() => onRemoveMaterial(linha.id)}
                     disabled={materiaisLinha.length === 1}
-                    className="p-2 text-ml-gray-dark hover:text-ml-red transition-colors disabled:opacity-30"
+                    className="p-2 text-ml-gray-dark hover:text-ml-red transition-colors disabled:opacity-30 shrink-0"
                   >
                     <Trash2 size={15} />
                   </button>
+                </div>
+
+                {/* Linha 2: Dimensões + Preço + Custo */}
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="text"
+                    inputMode="decimal"
+                    value={isM2 ? (linha.largura || '') : (linha.quantidade || '')}
+                    onChange={(e) => {
+                      const v = parseFloat(e.target.value.replace(',', '.')) || 0
+                      onUpdateMaterial(linha.id, isM2 ? 'largura' : 'quantidade', v)
+                    }}
+                    placeholder={isM2 ? 'Larg (cm)' : 'Quantidade'}
+                    className="flex-1 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
+                  />
+                  {isM2 && (
+                    <input
+                      type="text"
+                      inputMode="decimal"
+                      value={linha.altura || ''}
+                      onChange={(e) => {
+                        const v = parseFloat(e.target.value.replace(',', '.')) || 0
+                        onUpdateMaterial(linha.id, 'altura', v)
+                      }}
+                      placeholder="Alt (cm)"
+                      className="flex-1 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
+                    />
+                  )}
+                  {preco > 0 ? (
+                    <div
+                      title="Valor definido em Configurações. Acesse o menu para alterar."
+                      className="flex-1 border border-gray-200 rounded-lg px-2 py-2 text-sm bg-gray-50 text-ml-gray-dark cursor-default select-none flex items-center justify-between gap-1"
+                    >
+                      <span className="text-xs truncate">{formatBRL(preco)}/{unLabel}</span>
+                      <Info size={13} className="shrink-0 text-ml-gray-dark" />
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={onOpenConfig}
+                      className="flex-1 border border-amber-300 rounded-lg px-2 py-2 text-xs bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors text-center"
+                    >
+                      Cadastrar custo
+                    </button>
+                  )}
+                  {custo > 0 && (
+                    <span className="text-sm text-ml-green font-semibold whitespace-nowrap shrink-0">
+                      {formatBRL(custo)}
+                    </span>
+                  )}
                 </div>
               </div>
             )
