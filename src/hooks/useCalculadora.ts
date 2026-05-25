@@ -60,7 +60,7 @@ export function useCalculadora() {
 
   // UI
   const [configModalAberto, setConfigModalAberto] = useState(false)
-  const [painelMobileAberto, setPainelMobileAberto] = useState(false)
+  const [painelMobileAberto, setPainelMobileAberto] = useState(true)
   const [loading, setLoading] = useState(true)
 
   // Carrega dados do usuário no Supabase
