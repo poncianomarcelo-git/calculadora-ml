@@ -84,9 +84,9 @@ export function ConfigModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center px-4">
       <div className="absolute inset-0 bg-black/50" onClick={onClose} />
-      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[90vh] flex flex-col">
+      <div className="relative bg-white rounded-xl shadow-xl w-full max-w-lg max-h-[80vh] sm:max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
+        <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100">
           <h2 className="font-bold text-ml-text">Configurações</h2>
           <button onClick={onClose} className="text-ml-gray-dark hover:text-ml-text transition-colors">
             <X size={20} />
@@ -94,11 +94,11 @@ export function ConfigModal({
         </div>
 
         {/* Body */}
-        <div className="flex-1 overflow-y-auto px-5 py-4 space-y-5">
+        <div className="flex-1 overflow-y-auto px-4 py-3 space-y-4">
           {/* Custo hora e imposto padrão */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-sm font-medium text-ml-text mb-1">
+              <label className="block text-xs text-ml-gray-dark mb-1">
                 Custo/hora de máquina
               </label>
               <div className="relative">
@@ -108,12 +108,12 @@ export function ConfigModal({
                   value={custoHora || ''}
                   onChange={(e) => setCustoHora(parseFloat(e.target.value) || 0)}
                   min={0}
-                  className="w-full pl-9 pr-3 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-ml-blue focus:ring-1 focus:ring-ml-blue"
+                  className="w-full pl-9 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-ml-blue focus:ring-1 focus:ring-ml-blue"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium text-ml-text mb-1">
+              <label className="block text-xs text-ml-gray-dark mb-1">
                 Imposto padrão
               </label>
               <div className="relative">
@@ -124,7 +124,7 @@ export function ConfigModal({
                   min={0}
                   max={100}
                   step={0.1}
-                  className="w-full pl-3 pr-9 py-2.5 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-ml-blue focus:ring-1 focus:ring-ml-blue"
+                  className="w-full pl-3 pr-9 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:border-ml-blue focus:ring-1 focus:ring-ml-blue"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2 text-ml-gray-dark text-sm">%</span>
               </div>
@@ -246,7 +246,7 @@ export function ConfigModal({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 px-5 py-4 border-t border-gray-100">
+        <div className="flex items-center justify-end gap-3 px-4 py-3 border-t border-gray-100">
           <button
             onClick={onClose}
             className="text-ml-blue text-sm font-medium hover:underline"
