@@ -17,6 +17,7 @@
 body {
   font-family: 'Inter', 'Nunito Sans', sans-serif;
   color: #333333;
+  overflow-x: hidden;
 }
 
 input[type="number"]::-webkit-inner-spin-button,

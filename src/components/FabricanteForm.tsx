@@ -188,8 +188,8 @@ export function FabricanteForm({
                   </button>
                 </div>
 
-                {/* Linha 2: Dimensões + Preço + Custo */}
-                <div className="flex gap-2 items-center">
+                {/* Linha 2: Dimensões */}
+                <div className={`grid gap-2 ${isM2 ? 'grid-cols-2' : 'grid-cols-1'}`}>
                   <input
                     type="text"
                     inputMode="decimal"
@@ -198,8 +198,8 @@ export function FabricanteForm({
                       const v = parseFloat(e.target.value.replace(',', '.')) || 0
                       onUpdateMaterial(linha.id, isM2 ? 'largura' : 'quantidade', v)
                     }}
-                    placeholder={isM2 ? 'Larg (cm)' : 'Quantidade'}
-                    className="flex-1 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
+                    placeholder={isM2 ? 'Largura (cm)' : 'Quantidade'}
+                    className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
                   />
                   {isM2 && (
                     <input
@@ -210,14 +210,18 @@ export function FabricanteForm({
                         const v = parseFloat(e.target.value.replace(',', '.')) || 0
                         onUpdateMaterial(linha.id, 'altura', v)
                       }}
-                      placeholder="Alt (cm)"
-                      className="flex-1 border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
+                      placeholder="Altura (cm)"
+                      className="w-full border border-gray-300 rounded-lg px-2 py-2 text-sm focus:outline-none focus:border-ml-blue"
                     />
                   )}
+                </div>
+
+                {/* Linha 3: Preço + Custo */}
+                <div className="flex gap-2 items-center">
                   {preco > 0 ? (
                     <div
                       title="Valor definido em Configurações. Acesse o menu para alterar."
-                      className="flex-1 border border-gray-200 rounded-lg px-2 py-2 text-sm bg-gray-50 text-ml-gray-dark cursor-default select-none flex items-center justify-between gap-1"
+                      className="flex-1 min-w-0 border border-gray-200 rounded-lg px-2 py-2 text-sm bg-gray-50 text-ml-gray-dark cursor-default select-none flex items-center justify-between gap-1"
                     >
                       <span className="text-xs truncate">{formatBRL(preco)}/{unLabel}</span>
                       <Info size={13} className="shrink-0 text-ml-gray-dark" />
@@ -226,7 +230,7 @@ export function FabricanteForm({
                     <button
                       type="button"
                       onClick={onOpenConfig}
-                      className="flex-1 border border-amber-300 rounded-lg px-2 py-2 text-xs bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors text-center"
+                      className="flex-1 min-w-0 border border-amber-300 rounded-lg px-2 py-2 text-xs bg-amber-50 text-amber-700 hover:bg-amber-100 transition-colors text-center"
                     >
                       Cadastrar custo
                     </button>
