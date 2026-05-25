@@ -28,9 +28,9 @@ function LinhaBreakdown({
   cor?: string
 }) {
   return (
-    <div className={`flex justify-between items-center py-1.5 ${destaque ? 'font-semibold' : ''}`}>
-      <span className={`text-sm ${cor || 'text-ml-gray-dark'}`}>{label}</span>
-      <span className={`text-sm font-medium ${cor || 'text-ml-text'}`}>{formatBRL(valor)}</span>
+    <div className={`flex justify-between items-center gap-2 py-1.5 ${destaque ? 'font-semibold' : ''}`}>
+      <span className={`text-sm min-w-0 ${cor || 'text-ml-gray-dark'}`}>{label}</span>
+      <span className={`text-sm font-medium shrink-0 ${cor || 'text-ml-text'}`}>{formatBRL(valor)}</span>
     </div>
   )
 }
@@ -192,7 +192,7 @@ export function ResultadoPanel({
             : <ChevronUp size={20} className="shrink-0" />}
         </button>
         {mobileAberto && (
-          <div className="bg-white border-t border-gray-100 max-h-[50vh] overflow-y-auto">
+          <div className="bg-white border-t border-gray-100 max-h-[50vh] overflow-y-auto overflow-x-hidden w-full">
             {conteudo}
           </div>
         )}

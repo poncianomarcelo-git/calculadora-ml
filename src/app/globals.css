@@ -14,10 +14,11 @@
   --font-sans: 'Inter', 'Nunito Sans', sans-serif;
 }
 
-body {
+html, body {
   font-family: 'Inter', 'Nunito Sans', sans-serif;
   color: #333333;
   overflow-x: hidden;
+  max-width: 100%;
 }
 
 input[type="number"]::-webkit-inner-spin-button,
