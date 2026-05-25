@@ -33,7 +33,7 @@ export function CalculadoraClient({ email }: CalculadoraClientProps) {
         onOpenConfig={() => calc.setConfigModalAberto(true)}
       />
 
-      <main className={`max-w-6xl mx-auto px-4 py-5 md:pb-5 transition-[padding] duration-300 ${calc.painelMobileAberto ? 'pb-[55vh]' : 'pb-24'}`}>
+      <main className="max-w-6xl mx-auto px-4 py-5 pb-24 md:pb-5">
         <div className="md:grid md:grid-cols-[1fr_360px] md:gap-5 md:items-start">
           {/* Formulário */}
           <div>
