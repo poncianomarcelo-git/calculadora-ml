@@ -132,6 +132,12 @@ export function ResultadoPanel({
             }`}>
               {tipoAnuncio === 'classico' ? 'Anúncio Clássico' : 'Anúncio Premium'}
             </span>
+            {precoAcima79 && (
+              <p className="mt-2 text-xs text-ml-gray-dark font-medium">
+                + frete variável{' '}
+                <span className="font-normal">(consultar no Mercado Livre)</span>
+              </p>
+            )}
           </div>
 
           {/* Comparação Clássico x Premium */}
