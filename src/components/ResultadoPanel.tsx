@@ -133,10 +133,13 @@ export function ResultadoPanel({
               {tipoAnuncio === 'classico' ? 'Anúncio Clássico' : 'Anúncio Premium'}
             </span>
             {precoAcima79 && (
-              <p className="mt-2 text-xs text-ml-gray-dark font-medium">
-                + frete variável{' '}
-                <span className="font-normal">(consultar no Mercado Livre)</span>
-              </p>
+              <div className="mt-2 pt-2 border-t border-black/10 flex items-center justify-center gap-1.5">
+                <Truck size={13} className="text-ml-text shrink-0" />
+                <p className="text-xs text-ml-text font-semibold">
+                  + frete variável{' '}
+                  <span className="font-normal text-ml-gray-dark">(consultar no Mercado Livre)</span>
+                </p>
+              </div>
             )}
           </div>
 
