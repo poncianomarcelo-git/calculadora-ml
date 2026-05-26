@@ -1,6 +1,6 @@
 'use client'
 
-import { Copy, Printer, ChevronUp, ChevronDown, AlertTriangle } from 'lucide-react'
+import { Copy, Printer, ChevronUp, ChevronDown, AlertTriangle, Truck } from 'lucide-react'
 import { formatBRL, formatPercent } from '@/utils/formulas'
 import type { Resultado, TipoAnuncio } from '@/types'
 
@@ -50,6 +50,7 @@ export function ResultadoPanel({
     resultado && resultado.preco > 0 ? resultado.breakdown.lucroValor / resultado.preco : 0
   const margemPerigosa = lucroPercentReal > 0 && lucroPercentReal < 0.1
   const precoAbaixo79 = resultado && resultado.preco < 79
+  const precoAcima79 = resultado && resultado.preco >= 79
 
   async function copiarResumo() {
     if (!resultado) return
@@ -159,6 +160,15 @@ export function ResultadoPanel({
             <div className="flex items-start gap-2 mt-3 bg-red-50 border border-ml-red rounded-lg px-3 py-2.5 text-xs text-ml-red">
               <AlertTriangle size={14} className="mt-0.5 shrink-0" />
               <span>Margem de lucro real abaixo de 10%! Verifique seus custos ou aumente o lucro desejado.</span>
+            </div>
+          )}
+
+          {precoAcima79 && (
+            <div className="flex items-start gap-2 mt-3 bg-blue-50 border border-blue-200 rounded-lg px-3 py-2.5 text-xs text-blue-800">
+              <Truck size={14} className="mt-0.5 shrink-0" />
+              <span>
+                <strong>Frete grátis obrigatório</strong> para produtos acima de R$79,00. O custo do frete que você paga ao ML varia conforme peso do produto, região de entrega e sua reputação como vendedor — consulte sua tabela de frete no Mercado Livre e some esse valor ao seu custo antes de precificar.
+              </span>
             </div>
           )}
         </>
